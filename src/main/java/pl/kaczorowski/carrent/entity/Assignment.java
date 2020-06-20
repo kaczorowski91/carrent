@@ -2,6 +2,7 @@ package pl.kaczorowski.carrent.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Assignment {
@@ -29,6 +31,15 @@ public class Assignment {
     private double realCost;
 
     public Assignment(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle) {
+        this.begin = begin;
+        this.appointedEnd = appointedEnd;
+        this.realEnd = realEnd;
+        this.user = user;
+        this.vehicle = vehicle;
+    }
+
+    public Assignment(Long id, LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle) {
+        this.id = id;
         this.begin = begin;
         this.appointedEnd = appointedEnd;
         this.realEnd = realEnd;

@@ -72,8 +72,8 @@ public class CarrentApplication {
         vehicleRepository.save(vehicle2);
         vehicleRepository.save(vehicle3);
         Assignment assignment1 = new Assignment(LocalDateTime.parse("2018-01-21T20:00"), LocalDateTime.parse("2019-03-21T08:00"),LocalDateTime.parse("2020-01-21T10:15"), user1,vehicle1);
-        Assignment assignment2 = new Assignment(LocalDateTime.parse("2019-01-21T20:00"), LocalDateTime.parse("2019-04-21T10:00"),LocalDateTime.parse("2020-04-23T10:15"), user1,vehicle1);
-        Assignment assignment3 = new Assignment(LocalDateTime.parse("2012-01-21T20:00"), LocalDateTime.parse("2020-03-21T20:00"),LocalDateTime.parse("2020-03-21T20:00"), user1,vehicle1);
+        Assignment assignment2 = new Assignment(LocalDateTime.parse("2019-01-21T20:00"), LocalDateTime.parse("2019-04-21T10:00"),null, user5,vehicle2);
+        Assignment assignment3 = new Assignment(LocalDateTime.parse("2012-01-21T20:00"), LocalDateTime.parse("2020-03-21T20:00"),null, user8,vehicle3);
         assignmentRepository.save(assignment1);
         assignmentRepository.save(assignment2);
         assignmentRepository.save(assignment3);

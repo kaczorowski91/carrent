@@ -16,6 +16,5 @@ public class AssignmentDto {
     private LocalDateTime realEnd;
     private Long userId;
     private Long vehicleId;
-
-
+    
 }
