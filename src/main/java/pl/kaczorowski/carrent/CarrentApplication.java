@@ -65,9 +65,9 @@ public class CarrentApplication {
         vehicleCategoryRepository.save(vehicleCategory1);
         vehicleCategoryRepository.save(vehicleCategory2);
         vehicleCategoryRepository.save(vehicleCategory3);
-        Vehicle vehicle1 = new Vehicle("Seat", "00001", vehicleCategory1);
-        Vehicle vehicle2 = new Vehicle("BMW", "00002", vehicleCategory2);
-        Vehicle vehicle3 = new Vehicle("MERCEDES", "00003", vehicleCategory2);
+        Vehicle vehicle1 = new Vehicle("Seat", "00001", vehicleCategory1,200.02);
+        Vehicle vehicle2 = new Vehicle("BMW", "00002", vehicleCategory2,23.94);
+        Vehicle vehicle3 = new Vehicle("MERCEDES", "00003", vehicleCategory2,32.32);
         vehicleRepository.save(vehicle1);
         vehicleRepository.save(vehicle2);
         vehicleRepository.save(vehicle3);

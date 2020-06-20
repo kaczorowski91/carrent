@@ -2,13 +2,16 @@ package pl.kaczorowski.carrent.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.kaczorowski.carrent.dto.VehicleAssignmentDto;
 import pl.kaczorowski.carrent.entity.Vehicle;
 import pl.kaczorowski.carrent.exception.EntityAlreadyExistsException;
 import pl.kaczorowski.carrent.exception.EntityNotFoundException;
 import pl.kaczorowski.carrent.exception.ExceptionType;
+import pl.kaczorowski.carrent.mapper.VehicleAssignmentMapper;
 import pl.kaczorowski.carrent.repository.VehicleRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VehicleService {
@@ -47,6 +50,15 @@ public class VehicleService {
     public void deleteVehicle(Long id) {
         getVehicle(id);
         vehicleRepository.deleteById(id);
+    }
+
+    public List<VehicleAssignmentDto>getVehicleAssignments(Long vehicleId){
+        return vehicleRepository.findById(vehicleId)
+                .map(Vehicle::getAssignments)
+                .orElseThrow(()->new EntityNotFoundException(ExceptionType.VEHICLE_NOT_FOUND, vehicleId.toString()))
+                .stream()
+                .map(VehicleAssignmentMapper::mapToVehicleAssignmentDto)
+                .collect(Collectors.toList());
     }
 
 

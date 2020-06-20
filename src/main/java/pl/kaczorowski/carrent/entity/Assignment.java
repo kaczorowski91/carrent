@@ -25,6 +25,8 @@ public class Assignment {
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
+    private double plannedCost;
+    private double realCost;
 
     public Assignment(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle) {
         this.begin = begin;

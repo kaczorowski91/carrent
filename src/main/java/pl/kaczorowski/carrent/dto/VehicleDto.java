@@ -12,4 +12,5 @@ public class VehicleDto {
     private String name;
     private String vehicleIdentifier;
     private String category;
+    private double costPerDay;
 }

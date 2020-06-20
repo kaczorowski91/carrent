@@ -22,20 +22,22 @@ public class VehicleMapper {
         vehicle.setId(vehicleDto.getId());
         vehicle.setName(vehicleDto.getName());
         vehicle.setVehicleIdentifier(vehicleDto.getVehicleIdentifier());
-        Optional <VehicleCategory> vehicleCategory = vehicleCategoryRepository.findByName(vehicleDto.getCategory());
+        Optional<VehicleCategory> vehicleCategory = vehicleCategoryRepository.findByName(vehicleDto.getCategory());
         vehicleCategory.ifPresent(vehicle::setCategory);
+        vehicle.setCostPerDay(vehicleDto.getCostPerDay());
         return vehicle;
     }
 
-    public VehicleDto mapToVehicleDto (final Vehicle vehicle){
+    public VehicleDto mapToVehicleDto(final Vehicle vehicle) {
         return new VehicleDto(
                 vehicle.getId(),
                 vehicle.getName(),
                 vehicle.getVehicleIdentifier(),
-                vehicle.getCategory().getName());
+                vehicle.getCategory().getName(),
+                vehicle.getCostPerDay());
     }
 
-    public List<VehicleDto> mapToVehicleDtoList(List<Vehicle>vehicles){
+    public List<VehicleDto> mapToVehicleDtoList(List<Vehicle> vehicles) {
         return vehicles.stream()
                 .map(this::mapToVehicleDto)
                 .collect(Collectors.toList());

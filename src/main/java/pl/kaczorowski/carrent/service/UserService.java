@@ -56,7 +56,7 @@ public class UserService {
                 .map(User::getAssignments)
                 .orElseThrow(()->new EntityNotFoundException(ExceptionType.USER_NOT_FOUND,userId.toString()))
                 .stream()
-                .map(UserAssignmentMapper::mapToUserAssigmentDto)
+                .map(UserAssignmentMapper::mapToUserAssignmentDto)
                 .collect(Collectors.toList());
     }
 

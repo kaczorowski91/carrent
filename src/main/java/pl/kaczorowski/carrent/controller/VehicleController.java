@@ -3,6 +3,7 @@ package pl.kaczorowski.carrent.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import pl.kaczorowski.carrent.dto.VehicleAssignmentDto;
 import pl.kaczorowski.carrent.dto.VehicleDto;
 import pl.kaczorowski.carrent.mapper.VehicleMapper;
 import pl.kaczorowski.carrent.service.VehicleService;
@@ -47,6 +48,11 @@ public class VehicleController {
     @DeleteMapping("/{id}")
     public void deleteVehicle(@PathVariable Long id) {
         vehicleService.deleteVehicle(id);
+    }
+
+    @GetMapping("/{id}/assignments")
+    public List<VehicleAssignmentDto>getVehicleAssignments(@PathVariable Long id){
+        return vehicleService.getVehicleAssignments(id);
     }
 
 }

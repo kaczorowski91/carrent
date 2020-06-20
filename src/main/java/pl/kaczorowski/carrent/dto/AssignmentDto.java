@@ -9,15 +9,13 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAssignmentDto {
+public class AssignmentDto {
     private Long id;
     private LocalDateTime begin;
     private LocalDateTime appointedEnd;
     private LocalDateTime realEnd;
+    private Long userId;
     private Long vehicleId;
-    private String vehicleName;
-    private String vehicleIdentifier;
-    private double plannedCost;
-    private double realCost;
+
 
 }
