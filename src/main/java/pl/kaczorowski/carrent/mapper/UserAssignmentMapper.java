@@ -7,7 +7,7 @@ import pl.kaczorowski.carrent.entity.Assignment;
 @Component
 public class UserAssignmentMapper {
 
-    public static UserAssignmentDto mapToUserAssignmentDto(final Assignment assignment){
+    public static UserAssignmentDto mapToUserAssignmentDto(final Assignment assignment) {
         return new UserAssignmentDto(
                 assignment.getId(),
                 assignment.getBegin(),

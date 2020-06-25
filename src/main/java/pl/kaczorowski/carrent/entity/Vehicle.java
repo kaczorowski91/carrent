@@ -23,13 +23,13 @@ public class Vehicle {
     private VehicleCategory category;
     private double costPerDay;
     @OneToMany(mappedBy = "vehicle")
-    private List<Assignment>assignments=new ArrayList<>();
+    private List<Assignment>assignments = new ArrayList<>();
 
 
     public Vehicle(String name, String vehicleIdentifier, VehicleCategory category, double costPerDay) {
         this.name = name;
         this.vehicleIdentifier = vehicleIdentifier;
         this.category = category;
-        this.costPerDay=costPerDay;
+        this.costPerDay = costPerDay;
     }
 }

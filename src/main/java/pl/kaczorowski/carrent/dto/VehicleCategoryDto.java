@@ -11,5 +11,4 @@ public class VehicleCategoryDto {
 
     private Long id;
     private String name;
-    private String vehicleCategory;
 }

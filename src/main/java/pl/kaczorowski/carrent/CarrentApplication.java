@@ -65,17 +65,18 @@ public class CarrentApplication {
         vehicleCategoryRepository.save(vehicleCategory1);
         vehicleCategoryRepository.save(vehicleCategory2);
         vehicleCategoryRepository.save(vehicleCategory3);
-        Vehicle vehicle1 = new Vehicle("Seat", "00001", vehicleCategory1,200.02);
-        Vehicle vehicle2 = new Vehicle("BMW", "00002", vehicleCategory2,23.94);
-        Vehicle vehicle3 = new Vehicle("MERCEDES", "00003", vehicleCategory2,32.32);
+        Vehicle vehicle1 = new Vehicle("Seat", "00001", vehicleCategory1, 200.02);
+        Vehicle vehicle2 = new Vehicle("BMW", "00002", vehicleCategory2, 23.94);
+        Vehicle vehicle3 = new Vehicle("MERCEDES", "00003", vehicleCategory2, 32.32);
         vehicleRepository.save(vehicle1);
         vehicleRepository.save(vehicle2);
         vehicleRepository.save(vehicle3);
-        Assignment assignment1 = new Assignment(LocalDateTime.parse("2018-01-21T20:00"), LocalDateTime.parse("2019-03-21T08:00"),LocalDateTime.parse("2020-01-21T10:15"), user1,vehicle1);
-        Assignment assignment2 = new Assignment(LocalDateTime.parse("2019-01-21T20:00"), LocalDateTime.parse("2019-04-21T10:00"),null, user5,vehicle2);
-        Assignment assignment3 = new Assignment(LocalDateTime.parse("2012-01-21T20:00"), LocalDateTime.parse("2020-03-21T20:00"),null, user8,vehicle3);
+        Assignment assignment1 = new Assignment(LocalDateTime.parse("2018-01-21T20:00"), LocalDateTime.parse("2019-03-21T08:00"), LocalDateTime.parse("2020-01-21T10:15"), user1, vehicle1);
+        Assignment assignment2 = new Assignment(LocalDateTime.parse("2019-01-21T20:00"), LocalDateTime.parse("2019-04-21T10:00"), null, user5, vehicle2);
+        Assignment assignment3 = new Assignment(LocalDateTime.parse("2012-01-21T20:00"), null, null, user8, vehicle3);
         assignmentRepository.save(assignment1);
         assignmentRepository.save(assignment2);
         assignmentRepository.save(assignment3);
+
     }
 }

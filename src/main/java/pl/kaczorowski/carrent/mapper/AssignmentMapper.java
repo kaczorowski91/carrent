@@ -40,7 +40,9 @@ public class AssignmentMapper {
                 assignment.getAppointedEnd(),
                 assignment.getRealEnd(),
                 assignment.getUser().getId(),
-                assignment.getVehicle().getId());
+                assignment.getVehicle().getId(),
+                assignment.getPlannedCost(),
+                assignment.getRealCost());
     }
 
     public List<AssignmentDto> mapToAssignmentDtoList(List<Assignment> assignments) {

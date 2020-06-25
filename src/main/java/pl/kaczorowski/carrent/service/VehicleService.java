@@ -52,10 +52,10 @@ public class VehicleService {
         vehicleRepository.deleteById(id);
     }
 
-    public List<VehicleAssignmentDto>getVehicleAssignments(Long vehicleId){
+    public List<VehicleAssignmentDto> getVehicleAssignments(Long vehicleId) {
         return vehicleRepository.findById(vehicleId)
                 .map(Vehicle::getAssignments)
-                .orElseThrow(()->new EntityNotFoundException(ExceptionType.VEHICLE_NOT_FOUND, vehicleId.toString()))
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionType.VEHICLE_NOT_FOUND, vehicleId.toString()))
                 .stream()
                 .map(VehicleAssignmentMapper::mapToVehicleAssignmentDto)
                 .collect(Collectors.toList());

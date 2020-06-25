@@ -13,4 +13,11 @@ public class VehicleDto {
     private String vehicleIdentifier;
     private String category;
     private double costPerDay;
+
+    public VehicleDto(String name, String vehicleIdentifier, String category, double costPerDay) {
+        this.name = name;
+        this.vehicleIdentifier = vehicleIdentifier;
+        this.category = category;
+        this.costPerDay = costPerDay;
+    }
 }

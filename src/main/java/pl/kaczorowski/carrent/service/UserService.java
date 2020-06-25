@@ -51,10 +51,10 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public List<UserAssignmentDto>getUserAssignments(Long userId){
+    public List<UserAssignmentDto> getUserAssignments(Long userId) {
         return userRepository.findById(userId)
                 .map(User::getAssignments)
-                .orElseThrow(()->new EntityNotFoundException(ExceptionType.USER_NOT_FOUND,userId.toString()))
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionType.USER_NOT_FOUND, userId.toString()))
                 .stream()
                 .map(UserAssignmentMapper::mapToUserAssignmentDto)
                 .collect(Collectors.toList());

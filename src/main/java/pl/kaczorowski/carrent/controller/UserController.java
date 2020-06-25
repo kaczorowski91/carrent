@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/assignments")
-    public List<UserAssignmentDto>getUserAssignments(@PathVariable Long id){
+    public List<UserAssignmentDto> getUserAssignments(@PathVariable Long id) {
         return userService.getUserAssignments(id);
     }
 }

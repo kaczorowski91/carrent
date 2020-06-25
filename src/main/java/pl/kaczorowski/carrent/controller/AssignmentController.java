@@ -30,9 +30,9 @@ public class AssignmentController {
         return assignmentMapper.mapToAssignmentDto(assignmentService.getAssignment(id));
     }
 
-    @PostMapping (consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public AssignmentDto saveAssignment(@RequestBody AssignmentDto assignmentDto) {
-            return assignmentMapper.mapToAssignmentDto(assignmentService.saveAssignment(assignmentDto));
+        return assignmentMapper.mapToAssignmentDto(assignmentService.saveAssignment(assignmentDto));
 
     }
 
@@ -43,7 +43,7 @@ public class AssignmentController {
 
     @PutMapping("/{id}/end")
     public LocalDateTime updateAssigmentWithEndDate(@PathVariable Long id) {
-       return assignmentService.endDateUpateAssignment(id);
+        return assignmentService.endDateUpateAssignment(id);
     }
 
     @PutMapping

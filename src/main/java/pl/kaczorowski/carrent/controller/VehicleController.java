@@ -51,7 +51,7 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}/assignments")
-    public List<VehicleAssignmentDto>getVehicleAssignments(@PathVariable Long id){
+    public List<VehicleAssignmentDto> getVehicleAssignments(@PathVariable Long id) {
         return vehicleService.getVehicleAssignments(id);
     }
 

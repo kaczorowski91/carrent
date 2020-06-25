@@ -9,12 +9,12 @@ import pl.kaczorowski.carrent.entity.Vehicle;
 import pl.kaczorowski.carrent.exception.AssignmentAlreadyFinishedException;
 import pl.kaczorowski.carrent.exception.EntityNotFoundException;
 import pl.kaczorowski.carrent.exception.ExceptionType;
-import pl.kaczorowski.carrent.mapper.AssignmentMapper;
 import pl.kaczorowski.carrent.repository.AssignmentRepository;
 import pl.kaczorowski.carrent.repository.UserRepository;
 import pl.kaczorowski.carrent.repository.VehicleRepository;
 
 import javax.transaction.Transactional;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -28,15 +28,19 @@ public class AssignmentService {
     private VehicleRepository vehicleRepository;
     @Autowired
     private AssignmentRepository assignmentRepository;
-    @Autowired
-    private AssignmentMapper assignmentMapper;
 
     public List<Assignment> getAssignments() {
-        return assignmentRepository.findAll();
+        List<Assignment> assignmentList = assignmentRepository.findAll();
+        for (Assignment assignment : assignmentList) {
+            calculateBill(assignment);
+        }
+        return assignmentList;
     }
 
     public Assignment getAssignment(Long id) {
-        return assignmentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ExceptionType.ASSIGNMENT_NOT_FOUND, id.toString()));
+        Assignment assignment = assignmentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ExceptionType.ASSIGNMENT_NOT_FOUND, id.toString()));
+        calculateBill(assignment);
+        return assignment;
     }
 
     public Assignment saveAssignment(AssignmentDto assignmentDto) {
@@ -50,6 +54,11 @@ public class AssignmentService {
         assignment.setRealEnd(assignmentDto.getRealEnd());
         assignment.setUser(user.orElseThrow(() -> new EntityNotFoundException(ExceptionType.USER_NOT_FOUND, userId.toString())));
         assignment.setVehicle(vehicle.orElseThrow(() -> new EntityNotFoundException(ExceptionType.VEHICLE_NOT_FOUND, vehicleId.toString())));
+
+        Duration durationPlannedCost = Duration.between(assignment.getBegin(), assignment.getAppointedEnd());
+        Duration durationRealCost = Duration.between(assignment.getBegin(), assignment.getRealEnd());
+        assignment.setPlannedCost(durationPlannedCost.toDays() * vehicle.get().getCostPerDay());
+        assignment.setRealCost(durationRealCost.toDays() * vehicle.get().getCostPerDay());
         return assignmentRepository.save(assignment);
     }
 
@@ -71,5 +80,17 @@ public class AssignmentService {
     public void deleteAssignment(Long id) {
         getAssignment(id);
         assignmentRepository.deleteById(id);
+    }
+
+    private void calculateBill(Assignment assignment) {
+        Optional<Vehicle> vehicle = vehicleRepository.findById(assignment.getVehicle().getId());
+        if (assignment.getAppointedEnd() != null) {
+            Duration durationPlannedCost = Duration.between(assignment.getBegin(), assignment.getAppointedEnd());
+            assignment.setPlannedCost(durationPlannedCost.toDays() * vehicle.get().getCostPerDay());
+        }
+        if (assignment.getRealEnd() != null) {
+            Duration durationRealCost = Duration.between(assignment.getBegin(), assignment.getRealEnd());
+            assignment.setRealCost(durationRealCost.toDays() * vehicle.get().getCostPerDay());
+        }
     }
 }

@@ -17,7 +17,7 @@ public class VehicleCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private Set<Vehicle> vehicles = new HashSet<>();
 
     public VehicleCategory(String name) {
