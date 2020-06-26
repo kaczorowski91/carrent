@@ -2,14 +2,16 @@ package pl.kaczorowski.carrent.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleCategory {
@@ -22,5 +24,19 @@ public class VehicleCategory {
 
     public VehicleCategory(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof VehicleCategory)) return false;
+        VehicleCategory that = (VehicleCategory) o;
+        return getId().equals(that.getId()) &&
+                getName().equals(that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName());
     }
 }

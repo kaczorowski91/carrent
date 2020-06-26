@@ -1,15 +1,15 @@
 package pl.kaczorowski.carrent.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
@@ -31,5 +31,22 @@ public class Vehicle {
         this.vehicleIdentifier = vehicleIdentifier;
         this.category = category;
         this.costPerDay = costPerDay;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehicle)) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Double.compare(vehicle.getCostPerDay(), getCostPerDay()) == 0 &&
+                getId().equals(vehicle.getId()) &&
+                getName().equals(vehicle.getName()) &&
+                getVehicleIdentifier().equals(vehicle.getVehicleIdentifier()) &&
+                Objects.equals(getAssignments(), vehicle.getAssignments());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getVehicleIdentifier(), getCostPerDay(), getAssignments());
     }
 }
