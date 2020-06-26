@@ -19,4 +19,11 @@ public class AssignmentDto {
     private double plannedCost;
     private double realCost;
 
+    public AssignmentDto(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, Long userId, Long vehicleId) {
+        this.begin = begin;
+        this.appointedEnd = appointedEnd;
+        this.realEnd = realEnd;
+        this.userId = userId;
+        this.vehicleId = vehicleId;
+    }
 }

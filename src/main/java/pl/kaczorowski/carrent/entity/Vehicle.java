@@ -18,11 +18,11 @@ public class Vehicle {
     private Long id;
     private String name;
     private String vehicleIdentifier;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private VehicleCategory category;
     private double costPerDay;
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.EAGER)
     private List<Assignment>assignments = new ArrayList<>();
 
 

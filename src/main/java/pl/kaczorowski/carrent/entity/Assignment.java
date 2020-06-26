@@ -46,4 +46,16 @@ public class Assignment {
         this.user = user;
         this.vehicle = vehicle;
     }
+
+    public Assignment(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle, double plannedCost, double realCost) {
+        this.begin = begin;
+        this.appointedEnd = appointedEnd;
+        this.realEnd = realEnd;
+        this.user = user;
+        this.vehicle = vehicle;
+        this.plannedCost = plannedCost;
+        this.realCost = realCost;
+    }
+
+
 }

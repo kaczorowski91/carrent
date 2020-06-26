@@ -29,16 +29,16 @@ public class VehicleMapperTest {
     @Test
     public void mapToVehicleTest() {
         //Given
-        VehicleCategory vehicleCategory = new VehicleCategory("car");
-        vehicleCategoryRepository.save(vehicleCategory);
-        VehicleDto vehicleDto = new VehicleDto("BMW", "00001", vehicleCategory.getName(), 50.50);
+        VehicleCategory vehicleCategory123 = new VehicleCategory("BIKE");
+        vehicleCategoryRepository.save(vehicleCategory123);
+        VehicleDto vehicleDto123 = new VehicleDto("BMW", "0094", vehicleCategory123.getName(), 50.50);
         //Then
-        Vehicle vehicle = vehicleMapper.mapToVehicle(vehicleDto);
+        Vehicle vehicle56 = vehicleMapper.mapToVehicle(vehicleDto123);
         //When
-        Assert.assertEquals(vehicleDto.getName(), vehicle.getName());
-        Assert.assertEquals(vehicleDto.getVehicleIdentifier(), vehicle.getVehicleIdentifier());
-        Assert.assertEquals(vehicleDto.getCategory(), vehicle.getCategory().getName());
-        Assert.assertEquals(vehicleDto.getCostPerDay(), vehicle.getCostPerDay(), 0);
+        Assert.assertEquals(vehicleDto123.getName(), vehicle56.getName());
+        Assert.assertEquals(vehicleDto123.getVehicleIdentifier(), vehicle56.getVehicleIdentifier());
+        Assert.assertEquals(vehicleDto123.getCategory(), vehicle56.getCategory().getName());
+        Assert.assertEquals(vehicleDto123.getCostPerDay(), vehicle56.getCostPerDay(), 0);
 
     }
 
