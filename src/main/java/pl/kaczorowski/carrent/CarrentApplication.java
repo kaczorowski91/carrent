@@ -5,14 +5,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import pl.kaczorowski.carrent.client.currency.CurrencyClient;
+import pl.kaczorowski.carrent.client.currency.CurrencyDto;
+import pl.kaczorowski.carrent.client.vehiclesCategory.VehiclesCategoryClient;
 import pl.kaczorowski.carrent.entity.Assignment;
 import pl.kaczorowski.carrent.entity.User;
 import pl.kaczorowski.carrent.entity.Vehicle;
 import pl.kaczorowski.carrent.entity.VehicleCategory;
-import pl.kaczorowski.carrent.repository.AssignmentRepository;
-import pl.kaczorowski.carrent.repository.UserRepository;
-import pl.kaczorowski.carrent.repository.VehicleCategoryRepository;
-import pl.kaczorowski.carrent.repository.VehicleRepository;
+import pl.kaczorowski.carrent.repository.*;
 
 import java.time.LocalDateTime;
 
@@ -35,20 +35,29 @@ public class CarrentApplication {
     @Autowired
     private AssignmentRepository assignmentRepository;
 
+    @Autowired
+    private CurrencyRepository currencyRepository;
+
+    @Autowired
+    private CurrencyClient currencyClient;
+
+    @Autowired
+    private VehiclesCategoryClient vehiclesCategoryClient;
+
 
     @EventListener(ApplicationReadyEvent.class)
     public void addData() {
         System.out.println();
-        User user1 = new User("Jack", "Sparrow", "05063200852");
-        User user2 = new User("Indiana", "Jones", "62595352");
-        User user3 = new User("Scarlett", "O'Hara", "050632133200852");
+        User user1 = new User("Jack", "Sparrow", "54");
+        User user2 = new User("Indiana", "Jones", "54");
+        User user3 = new User("Scarlett", "O'Hara", "5275");
         User user4 = new User("Vito", "Corleone", "101");
-        User user5 = new User("James", "Bond", "32131");
-        User user6 = new User("Mia", "Wallece", "0506320083132152");
-        User user7 = new User("Harry", "Potter", "5465");
-        User user8 = new User("Natalie", "PortMan", "5435345");
-        User user9 = new User("Will", "Smith", "3213213");
-        User user10 = new User("Al", "Pacino", "312321345");
+        User user5 = new User("James", "Bond", "557");
+        User user6 = new User("Mia", "Wallece", "54");
+        User user7 = new User("Harry", "Potter", "575");
+        User user8 = new User("Natalie", "PortMan", "54");
+        User user9 = new User("Will", "Smith", "45");
+        User user10 = new User("Al", "Pacino", "21");
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
@@ -77,6 +86,11 @@ public class CarrentApplication {
         assignmentRepository.save(assignment1);
         assignmentRepository.save(assignment2);
         assignmentRepository.save(assignment3);
+
+        for(int i=0;i<vehiclesCategoryClient.getCategory().getResults().size();i++){
+            VehicleCategory vehicleCategory100 = new VehicleCategory(vehiclesCategoryClient.getCategory().getResults().get(i).toString());
+            vehicleCategoryRepository.save(vehicleCategory100);
+        }
 
     }
 }
