@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/assignment")
+@RequestMapping("/v2/assignment")
 public class AssignmentController {
 
     @Autowired
@@ -42,11 +42,11 @@ public class AssignmentController {
     }
 
     @PutMapping("/{id}/end")
-    public LocalDateTime updateAssigmentWithEndDate(@PathVariable Long id) {
-        return assignmentService.endDateUpateAssignment(id);
+    public LocalDateTime updateAssignmentWithEndDate(@PathVariable Long id) {
+        return assignmentService.endDateUpdateAssignment(id);
     }
 
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public AssignmentDto updateAssignment(@RequestBody AssignmentDto assignmentDto) {
         return assignmentMapper.mapToAssignmentDto(assignmentService.updateAssignment(assignmentMapper.mapToAssignment(assignmentDto)));
     }

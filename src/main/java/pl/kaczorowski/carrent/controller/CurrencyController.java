@@ -8,7 +8,7 @@ import pl.kaczorowski.carrent.client.currency.CurrencyClient;
 import pl.kaczorowski.carrent.client.currency.CurrencyDto;
 
 @RestController
-@RequestMapping("/v1/currency")
+@RequestMapping("/v2/currency")
 public class CurrencyController {
 
     @Autowired

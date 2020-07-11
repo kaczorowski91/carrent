@@ -1,12 +1,16 @@
 package pl.kaczorowski.carrent.client.currency;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.math.BigDecimal;
-
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyRatesDto {
     @JsonProperty("EUR")
-    private BigDecimal eur;
+    private double eur;
     @JsonProperty("USD")
-    private BigDecimal usd;
+    private double usd;
 }

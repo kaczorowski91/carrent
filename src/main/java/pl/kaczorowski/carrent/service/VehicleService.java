@@ -3,11 +3,13 @@ package pl.kaczorowski.carrent.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kaczorowski.carrent.dto.VehicleAssignmentDto;
+import pl.kaczorowski.carrent.dto.VehicleDto;
 import pl.kaczorowski.carrent.entity.Vehicle;
 import pl.kaczorowski.carrent.exception.EntityAlreadyExistsException;
 import pl.kaczorowski.carrent.exception.EntityNotFoundException;
 import pl.kaczorowski.carrent.exception.ExceptionType;
 import pl.kaczorowski.carrent.mapper.VehicleAssignmentMapper;
+import pl.kaczorowski.carrent.mapper.VehicleMapper;
 import pl.kaczorowski.carrent.repository.VehicleRepository;
 
 import java.util.List;
@@ -19,31 +21,36 @@ public class VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    public List<Vehicle> getVehicles() {
-        return vehicleRepository.findAll();
+    @Autowired
+    private VehicleMapper vehicleMapper;
+
+    public List<VehicleDto> getVehicles() {
+        return vehicleMapper.mapToVehicleDtoList(vehicleRepository.findAll());
     }
 
-    public Vehicle getVehicle(Long id) {
-        return vehicleRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(ExceptionType.VEHICLE_NOT_FOUND, id.toString()));
+    public VehicleDto getVehicle(Long id) {
+        return vehicleMapper.mapToVehicleDto(vehicleRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionType.VEHICLE_NOT_FOUND, id.toString())));
     }
 
-    public List<Vehicle> getVehicleByName(String name) {
-        return vehicleRepository.findByName(name);
+    public List<VehicleDto> getVehicleByName(String name) {
+        return vehicleMapper.mapToVehicleDtoList(vehicleRepository.findByName(name));
     }
 
-    public Vehicle createVehicle(Vehicle vehicle) {
+    public Vehicle createVehicle(VehicleDto vehicleDto) {
+        Vehicle vehicle = vehicleMapper.mapToVehicle(vehicleDto);
         if (vehicleRepository.findByVehicleIdentifier(vehicle.getVehicleIdentifier()) != null) {
             throw new EntityAlreadyExistsException(ExceptionType.VEHICLE_NOT_CHANGE, vehicle.getVehicleIdentifier());
         }
         return vehicleRepository.save(vehicle);
     }
 
-    public Vehicle updateVehicle(Vehicle vehicle) {
-        Vehicle presentVehicle = getVehicle(vehicle.getId());
-        if (!presentVehicle.getVehicleIdentifier().equals(vehicle.getVehicleIdentifier())) {
-            throw new EntityAlreadyExistsException(ExceptionType.VEHICLE_NOT_CHANGE, vehicle.getVehicleIdentifier());
+    public Vehicle updateVehicle(VehicleDto vehicleDto) {
+        Vehicle presentVehicle = vehicleMapper.mapToVehicle(getVehicle(vehicleDto.getId()));
+        if (!presentVehicle.getVehicleIdentifier().equals(vehicleDto.getVehicleIdentifier())) {
+            throw new EntityAlreadyExistsException(ExceptionType.VEHICLE_NOT_CHANGE, vehicleDto.getVehicleIdentifier());
         }
+        Vehicle vehicle = vehicleMapper.mapToVehicle(vehicleDto);
         return vehicleRepository.save(vehicle);
     }
 

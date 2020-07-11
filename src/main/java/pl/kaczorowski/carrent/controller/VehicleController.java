@@ -11,7 +11,7 @@ import pl.kaczorowski.carrent.service.VehicleService;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/vehicle")
+@RequestMapping("v2/vehicle")
 public class VehicleController {
 
     @Autowired
@@ -22,27 +22,27 @@ public class VehicleController {
 
     @GetMapping
     public List<VehicleDto> getVehicles() {
-        return vehicleMapper.mapToVehicleDtoList(vehicleService.getVehicles());
+        return vehicleService.getVehicles();
     }
 
     @GetMapping("/{id}")
     public VehicleDto getVehicle(@PathVariable Long id) {
-        return vehicleMapper.mapToVehicleDto(vehicleService.getVehicle(id));
+        return vehicleService.getVehicle(id);
     }
 
     @GetMapping("/name")
     public List<VehicleDto> getVehicles(@RequestParam String name) {
-        return vehicleMapper.mapToVehicleDtoList(vehicleService.getVehicleByName(name));
+        return vehicleService.getVehicleByName(name);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public VehicleDto createVehicle(@RequestBody VehicleDto vehicleDto) {
-        return vehicleMapper.mapToVehicleDto(vehicleService.createVehicle(vehicleMapper.mapToVehicle(vehicleDto)));
+        return vehicleMapper.mapToVehicleDto(vehicleService.createVehicle(vehicleDto));
     }
 
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public VehicleDto updateVehicle(@RequestBody VehicleDto vehicleDto) {
-        return vehicleMapper.mapToVehicleDto(vehicleService.updateVehicle(vehicleMapper.mapToVehicle(vehicleDto)));
+        return vehicleMapper.mapToVehicleDto(vehicleService.updateVehicle((vehicleDto)));
     }
 
     @DeleteMapping("/{id}")

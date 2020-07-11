@@ -38,16 +38,18 @@ public class AssignmentMapperTest {
     @Test
     public void mapToAssignmentTest() {
         //Given
-        User user = new User("TestFirstname", "TestLastName", "000");
-        userRepository.save(user);
-        VehicleCategory vehicleCategory = new VehicleCategory("car");
-        vehicleCategoryRepository.save(vehicleCategory);
-        Vehicle vehicle = new Vehicle("BMW", "00001", vehicleCategory, 50.50);
-        vehicleRepository.save(vehicle);
+        User user1 = new User("TestFirstname", "TestLastName", "00087");
+        userRepository.save(user1);
+        VehicleCategory vehicleCategory1 = new VehicleCategory("truck");
+        vehicleCategoryRepository.save(vehicleCategory1);
+        Vehicle vehicle1 = new Vehicle("Lambo", "006565", vehicleCategory1, 50.50);
+        vehicleRepository.save(vehicle1);
 
         AssignmentDto assignmentDto = new AssignmentDto(LocalDateTime.now(), LocalDateTime.now().plusDays(10),
-                LocalDateTime.now().plusDays(20), user.getId(), vehicle.getId());
+                LocalDateTime.now().plusDays(20), user1.getId(), vehicle1.getId());
         //Then
+
+        System.out.println(vehicleRepository.findByName(vehicle1.getName()));
         Assignment assignment = assignmentMapper.mapToAssignment(assignmentDto);
         //When
         Assert.assertEquals(assignment.getBegin(), assignmentDto.getBegin());
@@ -61,11 +63,11 @@ public class AssignmentMapperTest {
     @Test
     public void mapToAssignmentDtoTest() {
         //Given
-        User user = new User("TestFirstname", "TestLastName", "000");
+        User user = new User("firstName", "LastName", "00043");
         userRepository.save(user);
         VehicleCategory vehicleCategory = new VehicleCategory("car");
         vehicleCategoryRepository.save(vehicleCategory);
-        Vehicle vehicle = new Vehicle("BMW", "00001", vehicleCategory, 50.50);
+        Vehicle vehicle = new Vehicle("BMW", "00004341", vehicleCategory, 520.50);
         vehicleRepository.save(vehicle);
         Assignment assignment = new Assignment(LocalDateTime.now(), LocalDateTime.now().plusDays(10),
                 LocalDateTime.now().plusDays(20), user, vehicle);
@@ -114,7 +116,6 @@ public class AssignmentMapperTest {
         Assert.assertEquals(assignmentDtoList.get(0).getBegin(), assignmentList.get(0).getBegin());
         Assert.assertEquals(assignmentDtoList.get(1).getUserId(), assignmentList.get(1).getUser().getId());
         Assert.assertEquals(assignmentDtoList.get(2).getVehicleId(), assignmentList.get(2).getVehicle().getId());
-
 
     }
 }

@@ -11,7 +11,7 @@ import pl.kaczorowski.carrent.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v2/user")
 public class UserController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getUsers() {
-        return userMapper.mapToUserDtoList(userService.getUsers());
+        return (userService.getUsers());
     }
 
     @GetMapping("/{id}")
@@ -32,12 +32,12 @@ public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto createUser(@RequestBody UserDto userDto) {
-        return userMapper.mapToUserDto(userService.createUser(userMapper.mapToUser(userDto)));
+        return userMapper.mapToUserDto(userService.createUser(userDto));
     }
 
     @PutMapping
     public UserDto updateUser(@RequestBody UserDto userDto) {
-        return userMapper.mapToUserDto(userService.updateUser(userMapper.mapToUser(userDto)));
+        return userMapper.mapToUserDto(userService.updateUser(userDto));
     }
 
     @DeleteMapping("/{id}")

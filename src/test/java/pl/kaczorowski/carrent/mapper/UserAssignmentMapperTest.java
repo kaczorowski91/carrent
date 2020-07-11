@@ -43,20 +43,20 @@ public class UserAssignmentMapperTest {
         vehicleCategoryRepository.save(vehicleCategory);
         Vehicle vehicle1 = new Vehicle("BMW", "00001", vehicleCategory, 50.50);
         vehicleRepository.save(vehicle1);
-        Assignment assignment1 =new Assignment(LocalDateTime.now(),LocalDateTime.now().plusDays(5),
-                LocalDateTime.now().plusDays(10),user,vehicle1);
+        Assignment assignment1 = new Assignment(LocalDateTime.now(), LocalDateTime.now().plusDays(5),
+                LocalDateTime.now().plusDays(10), user, vehicle1);
         assignmentRepository.save(assignment1);
         //Then
         UserAssignmentDto userAssignmentDto = UserAssignmentMapper.mapToUserAssignmentDto(assignment1);
         //When
-        Assert.assertEquals(userAssignmentDto.getBegin(),assignment1.getBegin());
-        Assert.assertEquals(userAssignmentDto.getAppointedEnd(),assignment1.getAppointedEnd());
-        Assert.assertEquals(userAssignmentDto.getRealEnd(),assignment1.getRealEnd());
-        Assert.assertEquals(userAssignmentDto.getVehicleId(),assignment1.getVehicle().getId());
-        Assert.assertEquals(userAssignmentDto.getVehicleName(),assignment1.getVehicle().getName());
-        Assert.assertEquals(userAssignmentDto.getVehicleIdentifier(),assignment1.getVehicle().getVehicleIdentifier());
-        Assert.assertEquals(userAssignmentDto.getPlannedCost(),assignment1.getPlannedCost(),0);
-        Assert.assertEquals(userAssignmentDto.getRealCost(),assignment1.getRealCost(),0);
+        Assert.assertEquals(userAssignmentDto.getBegin(), assignment1.getBegin());
+        Assert.assertEquals(userAssignmentDto.getAppointedEnd(), assignment1.getAppointedEnd());
+        Assert.assertEquals(userAssignmentDto.getRealEnd(), assignment1.getRealEnd());
+        Assert.assertEquals(userAssignmentDto.getVehicleId(), assignment1.getVehicle().getId());
+        Assert.assertEquals(userAssignmentDto.getVehicleName(), assignment1.getVehicle().getName());
+        Assert.assertEquals(userAssignmentDto.getVehicleIdentifier(), assignment1.getVehicle().getVehicleIdentifier());
+        Assert.assertEquals(userAssignmentDto.getPlannedCost(), assignment1.getPlannedCostPLN(), 0);
+        Assert.assertEquals(userAssignmentDto.getRealCost(), assignment1.getRealCostPLN(), 0);
 
     }
 }

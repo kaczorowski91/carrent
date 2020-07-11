@@ -12,14 +12,11 @@ import pl.kaczorowski.carrent.service.VehicleCategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/category")
+@RequestMapping("v2/category")
 public class VehicleCategoryController {
 
     @Autowired
     private VehicleCategoryService vehicleCategoryService;
-
-    @Autowired
-    private VehicleCategoryMapper vehicleCategoryMapper;
 
     @GetMapping
     public List<String> findAllNames() {
@@ -28,7 +25,7 @@ public class VehicleCategoryController {
 
     @GetMapping("/{id}")
     public VehicleCategoryDto getCategory(@PathVariable Long id) {
-        return vehicleCategoryMapper.mapToVehicleCategoryDto(vehicleCategoryService.getCategory(id));
+        return vehicleCategoryService.getCategory(id);
     }
 
 }

@@ -37,4 +37,12 @@ public class CurrencyClient {
                 .queryParam("base", currencyConfig.getNationalCurrency())
                 .build().encode().toUri();
     }
+
+    @Override
+    public String toString() {
+        return "CurrencyClient{" +
+                "restTemplate=" + restTemplate +
+                ", currencyConfig=" + currencyConfig +
+                '}';
+    }
 }

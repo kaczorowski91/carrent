@@ -27,8 +27,12 @@ public class Assignment {
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
-    private double plannedCost;
-    private double realCost;
+    private double plannedCostPLN;
+    private double realCostPLN;
+    private double plannedCostEUR;
+    private double realCostEUR;
+    private double plannedCostDOL;
+    private double realCostDOL;
 
     public Assignment(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle) {
         this.begin = begin;
@@ -47,15 +51,14 @@ public class Assignment {
         this.vehicle = vehicle;
     }
 
-    public Assignment(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle, double plannedCost, double realCost) {
+    public Assignment(LocalDateTime begin, LocalDateTime appointedEnd, LocalDateTime realEnd, User user, Vehicle vehicle, double plannedCostPLN, double realCostPLN) {
         this.begin = begin;
         this.appointedEnd = appointedEnd;
         this.realEnd = realEnd;
         this.user = user;
         this.vehicle = vehicle;
-        this.plannedCost = plannedCost;
-        this.realCost = realCost;
+        this.plannedCostPLN = plannedCostPLN;
+        this.realCostPLN = realCostPLN;
     }
-
 
 }

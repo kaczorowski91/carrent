@@ -3,6 +3,8 @@ package pl.kaczorowski.carrent.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.kaczorowski.carrent.dto.AssignmentDto;
+import pl.kaczorowski.carrent.dto.UserDto;
+import pl.kaczorowski.carrent.dto.VehicleDto;
 import pl.kaczorowski.carrent.entity.Assignment;
 import pl.kaczorowski.carrent.entity.User;
 import pl.kaczorowski.carrent.entity.Vehicle;
@@ -21,9 +23,13 @@ public class AssignmentMapper {
     @Autowired
     private VehicleService vehicleService;
 
+    @Autowired
+    private VehicleMapper vehicleMapper;
+
     public Assignment mapToAssignment(AssignmentDto assignmentDto) {
         User user = userService.getUser(assignmentDto.getUserId());
-        Vehicle vehicle = vehicleService.getVehicle(assignmentDto.getVehicleId());
+        VehicleDto vehicleDto = vehicleService.getVehicle(assignmentDto.getVehicleId());
+        Vehicle vehicle = vehicleMapper.mapToVehicle(vehicleDto);
         return new Assignment(
                 assignmentDto.getId(),
                 assignmentDto.getBegin(),
@@ -41,8 +47,12 @@ public class AssignmentMapper {
                 assignment.getRealEnd(),
                 assignment.getUser().getId(),
                 assignment.getVehicle().getId(),
-                assignment.getPlannedCost(),
-                assignment.getRealCost());
+                assignment.getPlannedCostPLN(),
+                assignment.getRealCostPLN(),
+                assignment.getPlannedCostEUR(),
+                assignment.getRealCostEUR(),
+                assignment.getPlannedCostDOL(),
+                assignment.getRealCostDOL());
     }
 
     public List<AssignmentDto> mapToAssignmentDtoList(List<Assignment> assignments) {

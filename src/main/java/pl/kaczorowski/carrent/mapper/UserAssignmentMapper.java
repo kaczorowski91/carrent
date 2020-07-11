@@ -16,7 +16,7 @@ public class UserAssignmentMapper {
                 assignment.getVehicle().getId(),
                 assignment.getVehicle().getName(),
                 assignment.getVehicle().getVehicleIdentifier(),
-                assignment.getPlannedCost(),
-                assignment.getRealCost());
+                assignment.getPlannedCostPLN(),
+                assignment.getRealCostPLN());
     }
 }

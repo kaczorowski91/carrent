@@ -6,13 +6,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import pl.kaczorowski.carrent.client.currency.CurrencyClient;
-import pl.kaczorowski.carrent.client.currency.CurrencyDto;
 import pl.kaczorowski.carrent.client.vehiclesCategory.VehiclesCategoryClient;
 import pl.kaczorowski.carrent.entity.Assignment;
 import pl.kaczorowski.carrent.entity.User;
 import pl.kaczorowski.carrent.entity.Vehicle;
 import pl.kaczorowski.carrent.entity.VehicleCategory;
-import pl.kaczorowski.carrent.repository.*;
+import pl.kaczorowski.carrent.repository.AssignmentRepository;
+import pl.kaczorowski.carrent.repository.UserRepository;
+import pl.kaczorowski.carrent.repository.VehicleCategoryRepository;
+import pl.kaczorowski.carrent.repository.VehicleRepository;
 
 import java.time.LocalDateTime;
 
@@ -34,12 +36,6 @@ public class CarrentApplication {
 
     @Autowired
     private AssignmentRepository assignmentRepository;
-
-    @Autowired
-    private CurrencyRepository currencyRepository;
-
-    @Autowired
-    private CurrencyClient currencyClient;
 
     @Autowired
     private VehiclesCategoryClient vehiclesCategoryClient;
@@ -87,10 +83,9 @@ public class CarrentApplication {
         assignmentRepository.save(assignment2);
         assignmentRepository.save(assignment3);
 
-        for(int i=0;i<vehiclesCategoryClient.getCategory().getResults().size();i++){
+        for (int i = 0; i < vehiclesCategoryClient.getCategory().getResults().size(); i++) {
             VehicleCategory vehicleCategory100 = new VehicleCategory(vehiclesCategoryClient.getCategory().getResults().get(i).toString());
             vehicleCategoryRepository.save(vehicleCategory100);
         }
-
     }
 }

@@ -58,7 +58,7 @@ public class VehicleAssignmentMapperTest {
         Assert.assertEquals(vehicleAssignmentDto.getUserId(), assignment1.getUser().getId());
         Assert.assertEquals(vehicleAssignmentDto.getUserFirstName(), assignment1.getUser().getFirstName());
         Assert.assertEquals(vehicleAssignmentDto.getUserLastName(), assignment1.getUser().getLastName());
-        Assert.assertEquals(vehicleAssignmentDto.getPlannedCost(), assignment1.getPlannedCost(), 0);
-        Assert.assertEquals(vehicleAssignmentDto.getRealCost(), assignment1.getRealCost(), 0);
+        Assert.assertEquals(vehicleAssignmentDto.getPlannedCost(), assignment1.getPlannedCostPLN(), 0);
+        Assert.assertEquals(vehicleAssignmentDto.getRealCost(), assignment1.getRealCostPLN(), 0);
     }
 }
