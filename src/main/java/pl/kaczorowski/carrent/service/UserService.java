@@ -46,10 +46,6 @@ public class UserService {
 
     public User updateUser(UserDto userDto) {
         User user = userMapper.mapToUser(userDto);
-        User presentUser = (getUser(user.getId()));
-        if (!presentUser.getPesel().equals(user.getPesel())) {
-            throw new EntityAlreadyExistsException(ExceptionType.USER_NOT_CHANGE, user.getPesel());
-        }
         return userRepository.save(user);
 
     }

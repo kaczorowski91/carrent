@@ -46,10 +46,6 @@ public class VehicleService {
     }
 
     public Vehicle updateVehicle(VehicleDto vehicleDto) {
-        Vehicle presentVehicle = vehicleMapper.mapToVehicle(getVehicle(vehicleDto.getId()));
-        if (!presentVehicle.getVehicleIdentifier().equals(vehicleDto.getVehicleIdentifier())) {
-            throw new EntityAlreadyExistsException(ExceptionType.VEHICLE_NOT_CHANGE, vehicleDto.getVehicleIdentifier());
-        }
         Vehicle vehicle = vehicleMapper.mapToVehicle(vehicleDto);
         return vehicleRepository.save(vehicle);
     }
